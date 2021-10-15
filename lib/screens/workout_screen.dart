@@ -22,7 +22,7 @@ class WorkoutScreen extends StatelessWidget {
         title: const Text('Treinos'),
         actions: <Widget>[
           IconButton(
-            icon: Icon(Icons.add),
+            icon: const Icon(Icons.add),
             onPressed: () => Navigator.of(context).pushNamed(
                 WorkoutManagementScreen.route,
                 arguments: {'title': 'Novo Treino'}),
