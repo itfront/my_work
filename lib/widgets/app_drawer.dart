@@ -9,7 +9,7 @@ class AppDrawer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Drawer(
       child: Container(
-        color: Color.fromRGBO(29, 36, 41, 0.8),
+        color: const Color.fromRGBO(29, 36, 41, 0.8),
         child: ListView(
           children: <Widget>[
             ListTile(
@@ -18,7 +18,9 @@ class AppDrawer extends StatelessWidget {
                 color: Theme.of(context).accentColor,
               ),
               title: const Text('Home'),
-              onTap: () => Navigator.of(context).pushNamed(HomeScreen.route,),
+              onTap: () => Navigator.of(context).pushNamed(
+                HomeScreen.route,
+              ),
             ),
             ListTile(
               leading: Icon(
@@ -26,8 +28,9 @@ class AppDrawer extends StatelessWidget {
                 color: Theme.of(context).accentColor,
               ),
               title: const Text('Treinos'),
-              onTap: () =>
-                  Navigator.of(context).pushNamed(WorkoutScreen.route,),
+              onTap: () => Navigator.of(context).pushNamed(
+                WorkoutScreen.route,
+              ),
             ),
           ],
         ),
