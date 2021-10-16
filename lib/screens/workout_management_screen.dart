@@ -53,8 +53,8 @@ class _WorkoutManagementScreenState extends State<WorkoutManagementScreen> {
 
     return Scaffold(
       appBar: AppBar(
-          //title: Text(arguments['title']),
-          ),
+        title: Text(arguments['title']),
+      ),
       extendBodyBehindAppBar: true,
       body: Stack(
         children: <Widget>[
@@ -111,7 +111,7 @@ class _WorkoutManagementScreenState extends State<WorkoutManagementScreen> {
                         items: _dropDownOptions
                             .map(
                               (e) => DropdownMenuItem(
-                                child: Text(e('name')),
+                                child: Text(e['name']),
                                 value: e['id'],
                               ),
                             )
