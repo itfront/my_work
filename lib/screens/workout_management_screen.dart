@@ -18,7 +18,7 @@ class _WorkoutManagementScreenState extends State<WorkoutManagementScreen> {
   bool _dropDownValid = true;
   int _dropDownValue = 0;
 
-  final List<Map<String, Object>> _dropDownOptions = [
+  final List<Map<String, dynamic>> _dropDownOptions = [
     {'id': 1, 'name': 'Segunda-feira'},
     {'id': 2, 'name': 'Terça-feira'},
     {'id': 3, 'name': 'Quarta-feira'},
@@ -48,7 +48,8 @@ class _WorkoutManagementScreenState extends State<WorkoutManagementScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final dynamic? arguments = ModalRoute.of(context)?.settings.arguments;
+    final dynamic arguments = ModalRoute.of(context)?.settings.arguments;
+    //final Map<String, Object> arguments = ModalRoute.of(context).settings.arguments;
     //final Object? arguments = ModalRoute.of(context)!.settings.arguments;
 
     return Scaffold(
@@ -112,13 +113,13 @@ class _WorkoutManagementScreenState extends State<WorkoutManagementScreen> {
                             .map(
                               (e) => DropdownMenuItem(
                                 child: Text(e['name']),
-                                value: e['id'],
+                                value: int.parse(e['id']),
                               ),
                             )
                             .toList(),
-                        onChanged: (value) {
+                        onChanged: (int? value) {
                           setState(() {
-                            _dropDownValue = value;
+                            _dropDownValue = value!;
                           });
                         },
                         hint: Text(
@@ -129,7 +130,8 @@ class _WorkoutManagementScreenState extends State<WorkoutManagementScreen> {
                         ),
                         icon: const Icon(Icons.calendar_today),
                         isExpanded: true,
-                        iconEnabledColor: Theme.of(context).accentColor,
+                        iconEnabledColor:
+                            Theme.of(context).colorScheme.secondary,
                         style: TextStyle(
                           fontSize:
                               Theme.of(context).textTheme.subtitle1!.fontSize,
@@ -148,7 +150,7 @@ class _WorkoutManagementScreenState extends State<WorkoutManagementScreen> {
                   ),
                   SizedBox(
                     height: 50,
-                    child: RaisedButton(
+                    child: ElevatedButton(
                       onPressed: _save,
                       child: Text(
                         'Salvar',

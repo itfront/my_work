@@ -52,6 +52,10 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSwatch().copyWith(
           secondary: const Color.fromRGBO(0, 223, 100, 1),
         ),
+        textSelectionTheme: const TextSelectionThemeData(
+          cursorColor: Color.fromRGBO(0, 223, 100, 1),
+          selectionHandleColor: Color.fromRGBO(0, 223, 100, 1),
+        ),
         inputDecorationTheme: const InputDecorationTheme(
           fillColor: Color.fromRGBO(48, 56, 62, 0.9),
           filled: true,
@@ -60,15 +64,13 @@ class MyApp extends StatelessWidget {
             color: Color.fromRGBO(151, 152, 152, 1),
           ),
         ),
-        cursorColor: const Color.fromRGBO(0, 223, 100, 1),
-        textSelectionHandleColor: const Color.fromRGBO(0, 223, 100, 1),
       ),
       //home: const HomeScreen(),
       routes: {
         HomeScreen.route: (_) => const HomeScreen(),
         WorkoutScreen.route: (_) => const WorkoutScreen(),
-        WorkoutManagementScreen.route: (_) => WorkoutManagementScreen(),
-      },
+        WorkoutManagementScreen.route: (_) => const WorkoutManagementScreen(),
+      }, //Routes
     );
-  }
-}
+  } // build
+} // MyApp
