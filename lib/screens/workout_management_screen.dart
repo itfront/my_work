@@ -19,6 +19,7 @@ class _WorkoutManagementScreenState extends State<WorkoutManagementScreen> {
   int _dropDownValue = 0;
 
   final List<Map<String, dynamic>> _dropDownOptions = [
+    {'id': 0, 'name': 'Escolha o dia da semana'},
     {'id': 1, 'name': 'Segunda-feira'},
     {'id': 2, 'name': 'Terça-feira'},
     {'id': 3, 'name': 'Quarta-feira'},
@@ -113,7 +114,7 @@ class _WorkoutManagementScreenState extends State<WorkoutManagementScreen> {
                             .map(
                               (e) => DropdownMenuItem(
                                 child: Text(e['name']),
-                                value: int.parse(e['id']),
+                                value: (int.parse(e['id'].toString())),
                               ),
                             )
                             .toList(),
