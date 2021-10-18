@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_work/screens/exercise_screen.dart';
 import 'package:my_work/screens/workout_management_screen.dart';
 import 'package:my_work/widgets/app_drawer.dart';
 import 'package:my_work/widgets/workout_screen_custom_clipper.dart';
@@ -79,7 +80,8 @@ class WorkoutScreen extends StatelessWidget {
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: OutlineButton(
-                              onPressed: () => print('click exercícios'),
+                              onPressed: () => Navigator.of(context)
+                                  .pushNamed(ExerciseScreen.route),
                               borderSide: const BorderSide(
                                 color: Color.fromRGBO(0, 223, 100, 1),
                               ),

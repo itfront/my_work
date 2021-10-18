@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import './screens/exercise_management_screen.dart';
+import './screens/exercise_screen.dart';
 import './screens/home_screen.dart';
 import './screens/workout_management_screen.dart';
 import './screens/workout_screen.dart';
@@ -70,6 +72,8 @@ class MyApp extends StatelessWidget {
         HomeScreen.route: (_) => const HomeScreen(),
         WorkoutScreen.route: (_) => const WorkoutScreen(),
         WorkoutManagementScreen.route: (_) => const WorkoutManagementScreen(),
+        ExerciseScreen.route: (_) => const ExerciseScreen(),
+        ExerciseManagementScreen.route: (_) => ExerciseManagementScreen(),
       }, //Routes
     );
   } // build

@@ -30,7 +30,7 @@ class _WorkoutManagementScreenState extends State<WorkoutManagementScreen> {
   ];
 
   void _save() {
-    if (_dropDownValue > 0) {
+    if (_dropDownValue != null && _dropDownValue > 0) {
       setState(() {
         _dropDownValid = true;
       });
