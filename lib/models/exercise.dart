@@ -1,11 +1,10 @@
-import 'package:flutter/material.dart';
-
 class Exercise {
-  String id;
-  String name;
-  String description;
-  String imageUrl;
-  String workoutId;
+  String? id;
+  String? name;
+  String? description;
+  String? imageUrl;
+  String? workoutId;
 
-  Exercise(this.id, this.name, this.description, this.workoutId, this.imageUrl);
+  Exercise(
+      [this.id, this.name, this.description, this.imageUrl, this.workoutId]);
 }

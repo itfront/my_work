@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:my_work/providers/workout_provider.dart';
+import '../models/workout.dart';
+import 'package:provider/provider.dart';
 
 class WorkoutManagementScreen extends StatefulWidget {
   static const String route = '/workout-management';
@@ -12,6 +15,7 @@ class WorkoutManagementScreen extends StatefulWidget {
 
 class _WorkoutManagementScreenState extends State<WorkoutManagementScreen> {
   //Váriaveis
+  final Workout _workout = Workout();
   final _imageFocus = FocusNode();
   final _dropDownFocus = FocusNode();
   final _form = GlobalKey<FormState>();
@@ -30,7 +34,7 @@ class _WorkoutManagementScreenState extends State<WorkoutManagementScreen> {
   ];
 
   void _save() {
-    if (_dropDownValue != null && _dropDownValue > 0) {
+    if (_dropDownValue > 0) {
       setState(() {
         _dropDownValid = true;
       });
@@ -41,7 +45,9 @@ class _WorkoutManagementScreenState extends State<WorkoutManagementScreen> {
     }
     bool valid = _form.currentState!.validate();
     if (valid && _dropDownValid) {
-      print('Formulário válido');
+      _form.currentState!.save();
+      _workout.weekDay = _dropDownValue;
+      Provider.of<WorkoutProvider>(context).add(_workout);
     } else {
       print('Formulário inválido');
     }
@@ -75,6 +81,8 @@ class _WorkoutManagementScreenState extends State<WorkoutManagementScreen> {
               child: ListView(
                 children: <Widget>[
                   TextFormField(
+                    initialValue: _workout.name,
+                    onSaved: (value) => _workout.name,
                     textInputAction: TextInputAction.next,
                     onFieldSubmitted: (_) =>
                         FocusScope.of(context).requestFocus(_imageFocus),
@@ -87,6 +95,8 @@ class _WorkoutManagementScreenState extends State<WorkoutManagementScreen> {
                     },
                   ),
                   TextFormField(
+                    initialValue: _workout.imageUrl,
+                    onSaved: (value) => _workout.imageUrl,
                     focusNode: _imageFocus,
                     textInputAction: TextInputAction.next,
                     onFieldSubmitted: (_) =>
