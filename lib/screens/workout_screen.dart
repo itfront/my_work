@@ -14,7 +14,7 @@ class WorkoutScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //var value = ModalRoute.of(context)!.settings.arguments;
+    //final dynamic arguments = ModalRoute.of(context)?.settings.arguments;
     return Scaffold(
       appBar: AppBar(
         title: const Text('Treinos'),
@@ -43,7 +43,7 @@ class WorkoutScreen extends StatelessWidget {
             padding: const EdgeInsets.only(top: 90),
             child: FutureBuilder(
               future: Provider.of<WorkoutProvider>(context).get(),
-              builder: (_, snapshot) {
+              builder: (_, AsyncSnapshot snapshot) {
                 return snapshot.connectionState == ConnectionState.done
                     ? ListView.builder(
                         itemCount: snapshot.data.hashCode,
