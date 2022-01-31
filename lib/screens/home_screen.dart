@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 //import 'package:flutter/src/material/text_button.dart';
-import 'package:my_work/utils/Utils.dart';
+import 'package:my_work/utils/utils_system.dart';
 import 'package:my_work/widgets/app_drawer.dart';
 import 'package:my_work/widgets/today_workout.dart';
 
@@ -13,8 +13,9 @@ class HomeScreen extends StatelessWidget {
     List<TextButton> _list = [];
     for (int i = 1; i < 8; i++) {
       _list.add(TextButton(
+          // ignore: avoid_print
           onPressed: () => print('Botão $i'),
-          child: Text(utils.getWeekDayName(i))));
+          child: Text(Utils.getWeekDayName(i).substring(0, 3))));
     }
     return _list;
   }

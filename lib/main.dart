@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_work/providers/exercise_provider.dart';
 
 import './screens/exercise_management_screen.dart';
 import 'package:provider/provider.dart';
@@ -19,8 +20,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (_) => WorkoutProvider(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => WorkoutProvider()),
+        ChangeNotifierProvider(create: (_) => ExerciseProvider()),
+      ],
       child: MaterialApp(
         title: 'Flutter Demo',
         theme: ThemeData(
@@ -80,7 +84,8 @@ class MyApp extends StatelessWidget {
           WorkoutScreen.route: (_) => const WorkoutScreen(),
           WorkoutManagementScreen.route: (_) => const WorkoutManagementScreen(),
           ExerciseScreen.route: (_) => const ExerciseScreen(),
-          ExerciseManagementScreen.route: (_) => ExerciseManagementScreen(),
+          ExerciseManagementScreen.route: (_) =>
+              const ExerciseManagementScreen(),
         }, //Routes
       ),
     );

@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 
-class WorkoutScreenCustomClipper extends CustomClipper<Path>{
+class WorkoutScreenCustomClipper extends CustomClipper<Path> {
   @override
   Path getClip(Size size) {
     Path path = Path();
@@ -11,10 +11,10 @@ class WorkoutScreenCustomClipper extends CustomClipper<Path>{
 
     path.close();
     return path;
-
   }
 
   @override
+  // ignore: avoid_renaming_method_parameters
   bool shouldReclip(CustomClipper clipper) {
     return false;
   }

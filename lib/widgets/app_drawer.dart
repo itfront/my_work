@@ -15,7 +15,7 @@ class AppDrawer extends StatelessWidget {
             ListTile(
               leading: Icon(
                 Icons.home,
-                color: Theme.of(context).accentColor,
+                color: Theme.of(context).colorScheme.secondary,
               ),
               title: const Text('Home'),
               onTap: () => Navigator.of(context).pushNamed(
@@ -25,7 +25,7 @@ class AppDrawer extends StatelessWidget {
             ListTile(
               leading: Icon(
                 Icons.fitness_center,
-                color: Theme.of(context).accentColor,
+                color: Theme.of(context).colorScheme.secondary,
               ),
               title: const Text('Treinos'),
               onTap: () => Navigator.of(context).pushNamed(

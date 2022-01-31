@@ -33,7 +33,7 @@ class _WorkoutManagementScreenState extends State<WorkoutManagementScreen> {
     {'id': 7, 'name': 'Domingo'}
   ];
 
-  void _save() {
+  void _save() async {
     if (_dropDownValue > 0) {
       setState(() {
         _dropDownValid = true;
@@ -47,9 +47,16 @@ class _WorkoutManagementScreenState extends State<WorkoutManagementScreen> {
     if (valid && _dropDownValid) {
       _form.currentState!.save();
       _workout.weekDay = _dropDownValue;
-      Provider.of<WorkoutProvider>(context, listen: false).add(_workout);
-    } else {
-      print('Formulário inválido');
+
+      if (_workout.id != null) {
+        await Provider.of<WorkoutProvider>(context, listen: false)
+            .update(_workout);
+      } else {
+        await Provider.of<WorkoutProvider>(context, listen: false)
+            .add(_workout);
+      }
+
+      Navigator.of(context).pop();
     }
   }
 
@@ -82,7 +89,7 @@ class _WorkoutManagementScreenState extends State<WorkoutManagementScreen> {
                 children: <Widget>[
                   TextFormField(
                     initialValue: _workout.name,
-                    onSaved: (value) => _workout.name,
+                    onSaved: (value) => _workout.name = value,
                     textInputAction: TextInputAction.next,
                     onFieldSubmitted: (_) =>
                         FocusScope.of(context).requestFocus(_imageFocus),
@@ -96,7 +103,7 @@ class _WorkoutManagementScreenState extends State<WorkoutManagementScreen> {
                   ),
                   TextFormField(
                     initialValue: _workout.imageUrl,
-                    onSaved: (value) => _workout.imageUrl,
+                    onSaved: (value) => _workout.imageUrl = value,
                     focusNode: _imageFocus,
                     textInputAction: TextInputAction.next,
                     onFieldSubmitted: (_) =>

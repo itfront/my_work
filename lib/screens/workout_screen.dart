@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:my_work/providers/workout_provider.dart';
-import 'package:my_work/screens/workout_management_screen.dart';
-import 'package:my_work/widgets/app_drawer.dart';
-import 'package:my_work/widgets/workout_card.dart';
+import '../providers/workout_provider.dart';
+
+import '../screens/workout_management_screen.dart';
 import '../widgets/app_drawer.dart';
+import '../widgets/workout_card.dart';
+
 import './workout_management_screen.dart';
+
 import 'package:provider/provider.dart';
 
 class WorkoutScreen extends StatelessWidget {
@@ -39,23 +41,24 @@ class WorkoutScreen extends StatelessWidget {
               ),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.only(top: 90),
-            child: FutureBuilder(
-              future: Provider.of<WorkoutProvider>(context).get(),
-              builder: (_, snapshot) {
-                return snapshot.connectionState == ConnectionState.done
-                    ? ListView.builder(
-                        itemCount: snapshot.data.hashCode,
-                        itemBuilder: (_, index) {
-                          return WorkoutCard(
-                              snapshot.data[index].name,
-                              snapshot.data[index].imageUrl,
-                              snapshot.data[index].weekDay);
-                        })
-                    : CircularProgressIndicator();
-              },
-            ),
+          FutureBuilder(
+            future: Provider.of<WorkoutProvider>(context).get(),
+            builder: (_, AsyncSnapshot snapshot) {
+              return snapshot.connectionState == ConnectionState.done
+                  ? ListView.builder(
+                      itemCount: snapshot.data.length,
+                      itemBuilder: (_, index) {
+                        return WorkoutCard(
+                          snapshot.data[index].id,
+                          snapshot.data[index].imageUrl,
+                          snapshot.data[index].name,
+                          snapshot.data[index].weekDay,
+                        );
+                      })
+                  : const Center(
+                      child: CircularProgressIndicator(),
+                    );
+            },
           ),
         ],
       ),
