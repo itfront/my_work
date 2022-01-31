@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:my_work/screens/exercise_screen.dart';
+import 'package:my_work/providers/workout_provider.dart';
 import 'package:my_work/screens/workout_management_screen.dart';
 import 'package:my_work/widgets/app_drawer.dart';
-import 'package:my_work/widgets/workout_screen_custom_clipper.dart';
-import '../widgets/workout_screen_custom_clipper.dart';
+import 'package:my_work/widgets/workout_card.dart';
 import '../widgets/app_drawer.dart';
 import './workout_management_screen.dart';
+import 'package:provider/provider.dart';
 
 class WorkoutScreen extends StatelessWidget {
   const WorkoutScreen({Key? key}) : super(key: key);
@@ -15,9 +15,6 @@ class WorkoutScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     //var value = ModalRoute.of(context)!.settings.arguments;
-
-    final mediaQuery = MediaQuery.of(context);
-
     return Scaffold(
       appBar: AppBar(
         title: const Text('Treinos'),
@@ -44,58 +41,22 @@ class WorkoutScreen extends StatelessWidget {
           ),
           Padding(
             padding: const EdgeInsets.only(top: 90),
-            child: Card(
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20)),
-              child: Row(
-                children: <Widget>[
-                  SizedBox(
-                    width: mediaQuery.size.width * 0.4,
-                    child: ClipPath(
-                      clipper: WorkoutScreenCustomClipper(),
-                      child: const Image(
-                        image: AssetImage(
-                          'assets/images/treino2.jpg',
-                        ),
-                        height: 150,
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisSize: MainAxisSize.min,
-                      children: <Widget>[
-                        Text(
-                          'Corrida',
-                          style: Theme.of(context).textTheme.headline4,
-                        ),
-                        Text(
-                          'Sábado',
-                          style: Theme.of(context).textTheme.subtitle2,
-                        ),
-                        SizedBox(
-                          width: double.infinity,
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: OutlineButton(
-                              onPressed: () => Navigator.of(context)
-                                  .pushNamed(ExerciseScreen.route),
-                              borderSide: const BorderSide(
-                                color: Color.fromRGBO(0, 223, 100, 1),
-                              ),
-                              child: Text('Exercícios'),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  )
-                ],
-              ),
+            child: FutureBuilder(
+              future: Provider.of<WorkoutProvider>(context).get(),
+              builder: (_, snapshot) {
+                return snapshot.connectionState == ConnectionState.done
+                    ? ListView.builder(
+                        itemCount: snapshot.data.hashCode,
+                        itemBuilder: (_, index) {
+                          return WorkoutCard(
+                              snapshot.data[index].name,
+                              snapshot.data[index].imageUrl,
+                              snapshot.data[index].weekDay);
+                        })
+                    : CircularProgressIndicator();
+              },
             ),
-          )
+          ),
         ],
       ),
     );
