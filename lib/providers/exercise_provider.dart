@@ -8,7 +8,6 @@ class ExerciseProvider with ChangeNotifier {
 
   Future<List> get(String workoutId) async {
     List<Exercise> filtered = [];
-    // ignore: avoid_function_literals_in_foreach_calls
     _list.forEach((element) {
       if (element.workoutId == workoutId) {
         filtered.add(element);

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:my_work/models/exercise.dart';
 
+import '../providers/exercise_provider.dart';
+import 'package:provider/provider.dart';
+
 class ExerciseManagementScreen extends StatefulWidget {
   static const String route = '/exercise-management';
 
@@ -19,12 +22,15 @@ class _ExerciseManagementScreenState extends State<ExerciseManagementScreen> {
 
   bool isInit = true;
 
-  void _save() {
+  Future<void> _save() async {
     bool valid = _form.currentState!.validate();
 
     if (valid) {
-      //_form.currentState.save();
-      // await Provider.of<ExerciseProvider>(context).add(_exercise);
+      _form.currentState?.save();
+
+      await Provider.of<ExerciseProvider>(context, listen: false)
+          .add(_exercise);
+      Navigator.of(context).pop();
     }
   }
 

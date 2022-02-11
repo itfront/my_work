@@ -19,8 +19,10 @@ class ExerciseScreen extends StatelessWidget {
         actions: <Widget>[
           IconButton(
             icon: const Icon(Icons.add),
-            onPressed: () =>
-                Navigator.of(context).pushNamed(ExerciseManagementScreen.route),
+            onPressed: () => Navigator.of(context).pushNamed(
+              ExerciseManagementScreen.route,
+              arguments: arguments,
+            ),
           ),
         ],
       ),
@@ -37,7 +39,7 @@ class ExerciseScreen extends StatelessWidget {
           FutureBuilder(
               future: Provider.of<ExerciseProvider>(context)
                   .get(arguments['workoutId']),
-              builder: (_, AsyncSnapshot snapshot) {
+              builder: (BuildContext context, AsyncSnapshot snapshot) {
                 return snapshot.connectionState == ConnectionState.done
                     ? ListView.builder(
                         itemCount: snapshot.data.length,

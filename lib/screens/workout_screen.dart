@@ -1,40 +1,36 @@
 import 'package:flutter/material.dart';
-import '../providers/workout_provider.dart';
+import 'package:provider/provider.dart';
 
-import '../screens/workout_management_screen.dart';
-import '../widgets/app_drawer.dart';
 import '../widgets/workout_card.dart';
+import '../widgets/app_drawer.dart';
 
 import './workout_management_screen.dart';
 
-import 'package:provider/provider.dart';
+import '../providers/workout_provider.dart';
 
 class WorkoutScreen extends StatelessWidget {
-  const WorkoutScreen({Key? key}) : super(key: key);
-
-  static const route = '/workut';
+  static const route = '/workout';
 
   @override
   Widget build(BuildContext context) {
-    //var value = ModalRoute.of(context)!.settings.arguments;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Treinos'),
+        title: Text('Treinos'),
         actions: <Widget>[
           IconButton(
-            icon: const Icon(Icons.add),
+            icon: Icon(Icons.add),
             onPressed: () => Navigator.of(context).pushNamed(
                 WorkoutManagementScreen.route,
                 arguments: {'title': 'Novo Treino'}),
           ),
         ],
       ),
-      drawer: const AppDrawer(),
+      drawer: AppDrawer(),
       extendBodyBehindAppBar: true,
       body: Stack(
         children: <Widget>[
           Container(
-            decoration: const BoxDecoration(
+            decoration: BoxDecoration(
               image: DecorationImage(
                 image: AssetImage('assets/images/bg1.jpg'),
                 fit: BoxFit.cover,
@@ -55,7 +51,7 @@ class WorkoutScreen extends StatelessWidget {
                           snapshot.data[index].weekDay,
                         );
                       })
-                  : const Center(
+                  : Center(
                       child: CircularProgressIndicator(),
                     );
             },
